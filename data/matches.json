@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-15 00:02",
+  "last_updated": "2026-11-15 09:06",
   "mens": [
     {
       "id": "M20261031",
@@ -454,6 +454,41 @@
         "over_odds": 1.64,
         "under_odds": 1.79,
         "result": "OVER"
+      }
+    },
+    {
+      "id": "M20261115",
+      "date": "2026-11-15 14:00",
+      "round": "프로토 승부식 135회차",
+      "league": "KOVO남",
+      "home": "우리카드 우리WON",
+      "away": "현대캐피탈 스카이워커스",
+      "status": "예정",
+      "set_score": "-",
+      "sets_detail": [],
+      "total_points": null,
+      "win_lose": {
+        "match_no": "4211",
+        "home_odds": 2.3,
+        "away_odds": 1.4,
+        "winner": null,
+        "favorite": "AWAY",
+        "hit_odds": null,
+        "hit_type": null
+      },
+      "handicap": {
+        "match_no": "4212",
+        "standard": 1.5,
+        "home_odds": 1.54,
+        "away_odds": 2.0,
+        "result": null
+      },
+      "under_over": {
+        "match_no": "4213",
+        "standard": 184.5,
+        "over_odds": 1.74,
+        "under_odds": 1.74,
+        "result": null
       }
     }
   ],
@@ -914,6 +949,41 @@
         "over_odds": 1.74,
         "under_odds": "-",
         "result": "OVER"
+      }
+    },
+    {
+      "id": "W20261115",
+      "date": "2026-11-15 16:00",
+      "round": "프로토 승부식 135회차",
+      "league": "KOVO여",
+      "home": "현대건설 힐스테이트",
+      "away": "한국도로공사 하이패스",
+      "status": "예정",
+      "set_score": "-",
+      "sets_detail": [],
+      "total_points": null,
+      "win_lose": {
+        "match_no": "4228",
+        "home_odds": 3.9,
+        "away_odds": 1.12,
+        "winner": null,
+        "favorite": "AWAY",
+        "hit_odds": null,
+        "hit_type": null
+      },
+      "handicap": {
+        "match_no": "4229",
+        "standard": 1.5,
+        "home_odds": 2.33,
+        "away_odds": 1.39,
+        "result": null
+      },
+      "under_over": {
+        "match_no": "4230",
+        "standard": 174.5,
+        "over_odds": 1.74,
+        "under_odds": 1.74,
+        "result": null
       }
     }
   ]
