@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-16 09:07",
+  "last_updated": "2026-11-17 08:06",
   "mens": [
     {
       "id": "M20261031",
@@ -489,6 +489,41 @@
         "over_odds": 1.74,
         "under_odds": 1.74,
         "result": "UNDER"
+      }
+    },
+    {
+      "id": "M20261117",
+      "date": "2026-11-17 19:00",
+      "round": "프로토 승부식 136회차",
+      "league": "KOVO남",
+      "home": "한국전력 빅스톰",
+      "away": "OK저축은행 읏맨",
+      "status": "예정",
+      "set_score": null,
+      "sets_detail": [],
+      "total_points": null,
+      "win_lose": {
+        "match_no": "4439",
+        "home_odds": 1.36,
+        "away_odds": 2.41,
+        "winner": null,
+        "favorite": "HOME",
+        "hit_odds": null,
+        "hit_type": null
+      },
+      "handicap": {
+        "match_no": "4440",
+        "standard": -1.5,
+        "home_odds": 1.82,
+        "away_odds": 1.67,
+        "result": null
+      },
+      "under_over": {
+        "match_no": "4441",
+        "standard": 185.5,
+        "over_odds": 1.74,
+        "under_odds": 1.74,
+        "result": null
       }
     }
   ],
@@ -984,6 +1019,41 @@
         "over_odds": 1.74,
         "under_odds": 1.74,
         "result": "UNDER"
+      }
+    },
+    {
+      "id": "W20261117",
+      "date": "2026-11-17 19:00",
+      "round": "프로토 승부식 136회차",
+      "league": "KOVO여",
+      "home": "IBK기업은행 알토스",
+      "away": "정관장 레드스파크스",
+      "status": "예정",
+      "set_score": null,
+      "sets_detail": [],
+      "total_points": null,
+      "win_lose": {
+        "match_no": "4443",
+        "home_odds": 1.01,
+        "away_odds": 6.28,
+        "winner": null,
+        "favorite": "HOME",
+        "hit_odds": null,
+        "hit_type": null
+      },
+      "handicap": {
+        "match_no": "4444",
+        "standard": -2.5,
+        "home_odds": 1.54,
+        "away_odds": 2.0,
+        "result": null
+      },
+      "under_over": {
+        "match_no": "4445",
+        "standard": 139.5,
+        "over_odds": 1.74,
+        "under_odds": 1.74,
+        "result": null
       }
     }
   ]
