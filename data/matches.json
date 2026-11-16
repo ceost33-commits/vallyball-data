@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-15 09:06",
+  "last_updated": "2026-11-16 09:07",
   "mens": [
     {
       "id": "M20261031",
@@ -463,32 +463,32 @@
       "league": "KOVO남",
       "home": "우리카드 우리WON",
       "away": "현대캐피탈 스카이워커스",
-      "status": "예정",
-      "set_score": "-",
+      "status": "종료",
+      "set_score": "0:3",
       "sets_detail": [],
-      "total_points": null,
+      "total_points": 145,
       "win_lose": {
         "match_no": "4211",
         "home_odds": 2.3,
-        "away_odds": 1.4,
-        "winner": null,
+        "away_odds": 1.2,
+        "winner": "AWAY",
         "favorite": "AWAY",
-        "hit_odds": null,
-        "hit_type": null
+        "hit_odds": 1.2,
+        "hit_type": "정배"
       },
       "handicap": {
         "match_no": "4212",
         "standard": 1.5,
         "home_odds": 1.54,
-        "away_odds": 2.0,
-        "result": null
+        "away_odds": 1.5,
+        "result": "AWAY"
       },
       "under_over": {
         "match_no": "4213",
         "standard": 184.5,
         "over_odds": 1.74,
         "under_odds": 1.74,
-        "result": null
+        "result": "UNDER"
       }
     }
   ],
@@ -958,32 +958,32 @@
       "league": "KOVO여",
       "home": "현대건설 힐스테이트",
       "away": "한국도로공사 하이패스",
-      "status": "예정",
-      "set_score": "-",
+      "status": "종료",
+      "set_score": "0:3",
       "sets_detail": [],
-      "total_points": null,
+      "total_points": 132,
       "win_lose": {
         "match_no": "4228",
         "home_odds": 3.9,
         "away_odds": 1.12,
-        "winner": null,
+        "winner": "AWAY",
         "favorite": "AWAY",
-        "hit_odds": null,
-        "hit_type": null
+        "hit_odds": 1.12,
+        "hit_type": "정배"
       },
       "handicap": {
         "match_no": "4229",
         "standard": 1.5,
         "home_odds": 2.33,
-        "away_odds": 1.39,
-        "result": null
+        "away_odds": 1.31,
+        "result": "AWAY"
       },
       "under_over": {
         "match_no": "4230",
         "standard": 174.5,
         "over_odds": 1.74,
         "under_odds": 1.74,
-        "result": null
+        "result": "UNDER"
       }
     }
   ]
