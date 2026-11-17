@@ -61,11 +61,11 @@ def fmt_pong(alt):
 
 
 def flow_badges(seq, sym_map, cls_map, keep=6):
-    """최근 경기 흐름 기호(오래된 → 최신, 최신은 테두리 강조)."""
-    tail = seq[-keep:]
+    """최근 경기 흐름 기호(최신 → 오래된, 가장 최근이 맨 왼쪽·테두리 강조)."""
+    tail = list(reversed(seq[-keep:]))
     out = []
     for i, v in enumerate(tail):
-        latest = " fs-latest" if i == len(tail) - 1 else ""
+        latest = " fs-latest" if i == 0 else ""
         out.append(f'<span class="fs {cls_map[v]}{latest}">{sym_map[v]}</span>')
     return "".join(out)
 
