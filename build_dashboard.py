@@ -1124,6 +1124,7 @@ html = f"""<!DOCTYPE html>
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 6px;
     }}
 
     .streak-label {{
@@ -1138,6 +1139,8 @@ html = f"""<!DOCTYPE html>
       border-radius: 4px;
       font-weight: 800;
       letter-spacing: -0.3px;
+      white-space: nowrap;
+      flex-shrink: 0;
     }}
 
     .streak-val {{
