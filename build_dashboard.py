@@ -28,7 +28,10 @@ def get_league_handicap_type(m):
 
 # ---------------------------------------------------------------- 퐁당(교대) 패턴
 # 퐁당 = 결과가 A↔B로 번갈아 이어지는 흐름. 최근 경기부터 거꾸로 세어
-# 서로 반대 결과가 연달아 나온 길이(교대 연속 수)를 구하고 3경기 이상이면 '퐁당'으로 본다.
+# 서로 반대 결과가 연달아 나온 길이(교대 경기 수)를 구한다.
+# 1사이클(언→옵 / 옵→언) = 2경기 = 1퐁당. 따라서 퐁당 수 = 교대 경기 수 / 2
+# (2경기 → 1퐁당, 3경기 → 1.5퐁당, 4경기 → 2퐁당, 5경기 → 2.5퐁당, 6경기 → 3퐁당).
+# 1.5퐁당(3경기) 이상일 때만 퐁당으로 강조한다. 'N연속 퐁당' 같은 경기 수 표기는 쓰지 않는다.
 HANDI_SYM = {"마핸": "마", "플핸": "플"}
 UO_SYM = {"OVER": "오", "UNDER": "언"}
 UO_KO = {"OVER": "오버", "UNDER": "언더"}
@@ -48,6 +51,13 @@ def alt_run_len(seq):
         else:
             break
     return n
+
+
+def fmt_pong(alt):
+    """교대 경기 수 → 퐁당 수 표기 (2경기 = 1사이클 = 1퐁당)."""
+    if alt <= 0:
+        return "0퐁당"
+    return f"{alt / 2:g}퐁당"
 
 
 def flow_badges(seq, sym_map, cls_map, keep=6):
@@ -72,11 +82,11 @@ def pd_card_html(title, pair_label, alt, seq, sym_map, cls_map, streak_n, streak
     on = alt >= PD_MIN
     card_cls = "streak-card-pd" if on else "streak-card-plain"
     pill_cls = "pill-pd" if on else "pill-gray"
-    pill_txt = "🔄 퐁당" if on else "퐁당 없음"
+    pill_txt = f"🔄 {fmt_pong(alt)}" if on else ("1퐁당" if alt == 2 else "퐁당 없음")
     if on:
-        val = f"{alt}연속 퐁당 ({pair_label})"
+        val = f"{fmt_pong(alt)} ({alt}경기)"
     elif alt == 2:
-        val = "2경기 교대 · 퐁당 아님"
+        val = f"1퐁당 ({alt}경기)"
     else:
         val = f"{streak_n}연속 {streak_type} 유지"
     shown = min(len(seq), 6)
@@ -92,7 +102,7 @@ def pd_card_html(title, pair_label, alt, seq, sym_map, cls_map, streak_n, streak
 
 
 def render_pd_teams_box(teams, matches):
-    """리그 전체 뷰: 현재 퐁당(3경기 이상 교대) 진행 중인 구단 요약 박스."""
+    """리그 전체 뷰: 현재 퐁당(1.5퐁당 = 3경기 이상 교대) 진행 중인 구단 요약 박스."""
     rows = []
     for t in teams:
         tms = [m for m in matches if m.get("status") == "종료" and t in (m["home"], m["away"])]
@@ -108,10 +118,10 @@ def render_pd_teams_box(teams, matches):
     chips = "".join(r[2] for r in rows)
     if chips:
         body = f'<div class="pd-teams-chips">{chips}</div>'
-        sub = f"3경기 이상 교대 · {len(rows)}건"
+        sub = f"1.5퐁당(3경기) 이상 · {len(rows)}건"
     else:
-        body = '<div class="pd-teams-empty">현재 3경기 이상 퐁당 구단 없음</div>'
-        sub = "3경기 이상 교대"
+        body = '<div class="pd-teams-empty">현재 1.5퐁당(3경기) 이상 진행 구단 없음</div>'
+        sub = "1.5퐁당(3경기) 이상"
     return f"""
       <div class="pd-teams-box">
         <div class="pd-teams-head">
@@ -127,7 +137,7 @@ def pd_chip_html(team_short, pair_label, alt, seq, sym_map, cls_map, kind):
     return (
         f'<span class="pd-chip pd-chip-{kind}">'
         f'<span class="pd-chip-team">{team_short}</span>'
-        f'<span class="pd-chip-tag">{pair_label} {alt}</span>'
+        f'<span class="pd-chip-tag">{pair_label} {fmt_pong(alt)} ({alt}경기)</span>'
         f'<span class="pd-chip-flow">{flow}</span>'
         f'</span>'
     )
@@ -218,9 +228,9 @@ def render_match_cards(matches_desc, running_streaks_map, focus_team=None):
         streak_bar_html = ""
         if s_info:
             w_pill = f'<span class="streak-pill {s_info["w_cls"]}">{s_info["w_tag"]}</span>' if focus_team else ''
-            h_pd_pill = (f'<span class="streak-pill pill-pd">🔄 마↔플 {s_info["h_alt"]}연속 퐁당</span>'
+            h_pd_pill = (f'<span class="streak-pill pill-pd">🔄 마↔플 {fmt_pong(s_info["h_alt"])} ({s_info["h_alt"]}경기)</span>'
                          if s_info.get("h_alt", 0) >= PD_MIN else '')
-            uo_pd_pill = (f'<span class="streak-pill pill-pd">🔄 언↔오 {s_info["uo_alt"]}연속 퐁당</span>'
+            uo_pd_pill = (f'<span class="streak-pill pill-pd">🔄 언↔오 {fmt_pong(s_info["uo_alt"])} ({s_info["uo_alt"]}경기)</span>'
                           if s_info.get("uo_alt", 0) >= PD_MIN else '')
             streak_bar_html = f"""
               <div class="match-streak-pill-bar">
@@ -440,8 +450,8 @@ def render_team_view_pane(view_id, matches, team):
         uo_badge_lbl = "🔥 오버" if uo_type == "OVER" else "🧊 언더"
 
     pd_cards_html = (
-        pd_card_html("세트 핸디 퐁당", "마핸↔플핸", alt_run_len(h_hist), h_hist, HANDI_SYM, HANDI_FS, h_streak, h_type) +
-        pd_card_html("총득점 퐁당", "언더↔오버", alt_run_len(uo_hist), uo_hist, UO_SYM, UO_FS, uo_streak, UO_KO.get(uo_type, uo_type))
+        pd_card_html("마핸/플핸 퐁당", "마핸↔플핸", alt_run_len(h_hist), h_hist, HANDI_SYM, HANDI_FS, h_streak, h_type) +
+        pd_card_html("언오버 퐁당", "언더↔오버", alt_run_len(uo_hist), uo_hist, UO_SYM, UO_FS, uo_streak, UO_KO.get(uo_type, uo_type))
     )
 
     cards_html = render_match_cards(desc, running_streaks_map, focus_team=team)
@@ -609,7 +619,7 @@ def render_all_view_pane(view_id, league_key, matches, teams):
         uo_badge_lbl = "🔥 오버" if uo_type == "OVER" else "🧊 언더"
 
     pd_cards_html = (
-        pd_card_html("리그 핸디 퐁당", "마핸↔플핸", alt_run_len(h_hist), h_hist, HANDI_SYM, HANDI_FS, h_streak, h_type) +
+        pd_card_html("리그 마핸/플핸 퐁당", "마핸↔플핸", alt_run_len(h_hist), h_hist, HANDI_SYM, HANDI_FS, h_streak, h_type) +
         pd_card_html("리그 언오버 퐁당", "언더↔오버", alt_run_len(uo_hist), uo_hist, UO_SYM, UO_FS, uo_streak, UO_KO.get(uo_type, uo_type))
     )
     pd_teams_box = render_pd_teams_box(teams, matches)
