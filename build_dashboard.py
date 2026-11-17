@@ -123,7 +123,7 @@ def render_pd_teams_box(teams, matches):
 
 
 def pd_chip_html(team_short, pair_label, alt, seq, sym_map, cls_map, kind):
-    flow = flow_badges(seq, sym_map, cls_map, keep=4)
+    flow = flow_badges(seq, sym_map, cls_map, keep=min(max(alt, 3), 5))
     return (
         f'<span class="pd-chip pd-chip-{kind}">'
         f'<span class="pd-chip-team">{team_short}</span>'
