@@ -26,6 +26,113 @@ def get_league_handicap_type(m):
     else:
         return "마핸" if std > 0 else "플핸"
 
+# ---------------------------------------------------------------- 퐁당(교대) 패턴
+# 퐁당 = 결과가 A↔B로 번갈아 이어지는 흐름. 최근 경기부터 거꾸로 세어
+# 서로 반대 결과가 연달아 나온 길이(교대 연속 수)를 구하고 3경기 이상이면 '퐁당'으로 본다.
+HANDI_SYM = {"마핸": "마", "플핸": "플"}
+UO_SYM = {"OVER": "오", "UNDER": "언"}
+UO_KO = {"OVER": "오버", "UNDER": "언더"}
+HANDI_FS = {"마핸": "fs-ma", "플핸": "fs-pl"}
+UO_FS = {"OVER": "fs-over", "UNDER": "fs-under"}
+PD_MIN = 3
+
+
+def alt_run_len(seq):
+    """최근 결과부터 거꾸로 세어 서로 다른 값이 번갈아 이어진 길이."""
+    if not seq:
+        return 0
+    n = 1
+    for i in range(len(seq) - 2, -1, -1):
+        if seq[i] != seq[i + 1]:
+            n += 1
+        else:
+            break
+    return n
+
+
+def flow_badges(seq, sym_map, cls_map, keep=6):
+    """최근 경기 흐름 기호(오래된 → 최신, 최신은 테두리 강조)."""
+    tail = seq[-keep:]
+    out = []
+    for i, v in enumerate(tail):
+        latest = " fs-latest" if i == len(tail) - 1 else ""
+        out.append(f'<span class="fs {cls_map[v]}{latest}">{sym_map[v]}</span>')
+    return "".join(out)
+
+
+def pd_card_html(title, pair_label, alt, seq, sym_map, cls_map, streak_n, streak_type):
+    """스트릭 영역에 붙는 퐁당 카드 1장."""
+    if alt <= 0:
+        return (
+            f'<div class="streak-card streak-card-gray">'
+            f'<div class="streak-card-top"><span class="streak-label">{title}</span>'
+            f'<span class="streak-badge-pill pill-gray">-</span></div>'
+            f'<div class="streak-val">기록 없음</div></div>'
+        )
+    on = alt >= PD_MIN
+    card_cls = "streak-card-pd" if on else "streak-card-plain"
+    pill_cls = "pill-pd" if on else "pill-gray"
+    pill_txt = "🔄 퐁당" if on else "퐁당 없음"
+    if on:
+        val = f"{alt}연속 퐁당 ({pair_label})"
+    elif alt == 2:
+        val = "2경기 교대 · 퐁당 아님"
+    else:
+        val = f"{streak_n}연속 {streak_type} 유지"
+    shown = min(len(seq), 6)
+    flow = flow_badges(seq, sym_map, cls_map)
+    return (
+        f'<div class="streak-card {card_cls}">'
+        f'<div class="streak-card-top"><span class="streak-label">{title}</span>'
+        f'<span class="streak-badge-pill {pill_cls}">{pill_txt}</span></div>'
+        f'<div class="streak-val">{val}</div>'
+        f'<div class="pd-flow"><span class="pd-flow-lbl">최근 {shown}경기</span>{flow}</div>'
+        f'</div>'
+    )
+
+
+def render_pd_teams_box(teams, matches):
+    """리그 전체 뷰: 현재 퐁당(3경기 이상 교대) 진행 중인 구단 요약 박스."""
+    rows = []
+    for t in teams:
+        tms = [m for m in matches if m.get("status") == "종료" and t in (m["home"], m["away"])]
+        tms.sort(key=lambda x: x.get("date", ""))
+        h_seq = [get_league_handicap_type(m) for m in tms]
+        uo_seq = [m["under_over"]["result"] for m in tms]
+        ha, ua = alt_run_len(h_seq), alt_run_len(uo_seq)
+        if ha >= PD_MIN:
+            rows.append((ha, t, pd_chip_html(t.split()[0], "마↔플", ha, h_seq, HANDI_SYM, HANDI_FS, "ma")))
+        if ua >= PD_MIN:
+            rows.append((ua, t, pd_chip_html(t.split()[0], "언↔오", ua, uo_seq, UO_SYM, UO_FS, "uo")))
+    rows.sort(key=lambda r: (-r[0], r[1]))
+    chips = "".join(r[2] for r in rows)
+    if chips:
+        body = f'<div class="pd-teams-chips">{chips}</div>'
+        sub = f"3경기 이상 교대 · {len(rows)}건"
+    else:
+        body = '<div class="pd-teams-empty">현재 3경기 이상 퐁당 구단 없음</div>'
+        sub = "3경기 이상 교대"
+    return f"""
+      <div class="pd-teams-box">
+        <div class="pd-teams-head">
+          <span class="pd-teams-title">🔄 현재 퐁당 진행 중 구단</span>
+          <span class="pd-teams-sub">{sub}</span>
+        </div>
+        {body}
+      </div>"""
+
+
+def pd_chip_html(team_short, pair_label, alt, seq, sym_map, cls_map, kind):
+    flow = flow_badges(seq, sym_map, cls_map, keep=4)
+    return (
+        f'<span class="pd-chip pd-chip-{kind}">'
+        f'<span class="pd-chip-team">{team_short}</span>'
+        f'<span class="pd-chip-tag">{pair_label} {alt}</span>'
+        f'<span class="pd-chip-flow">{flow}</span>'
+        f'</span>'
+    )
+
+
 def render_team_panel_html(league_key, teams, matches):
     prefix = "mt" if league_key == "mens" else "wt"
     league_title = "남자부 7개 구단 선택" if league_key == "mens" else "여자부 7개 구단 선택"
@@ -111,12 +218,18 @@ def render_match_cards(matches_desc, running_streaks_map, focus_team=None):
         streak_bar_html = ""
         if s_info:
             w_pill = f'<span class="streak-pill {s_info["w_cls"]}">{s_info["w_tag"]}</span>' if focus_team else ''
+            h_pd_pill = (f'<span class="streak-pill pill-pd">🔄 마↔플 {s_info["h_alt"]}연속 퐁당</span>'
+                         if s_info.get("h_alt", 0) >= PD_MIN else '')
+            uo_pd_pill = (f'<span class="streak-pill pill-pd">🔄 언↔오 {s_info["uo_alt"]}연속 퐁당</span>'
+                          if s_info.get("uo_alt", 0) >= PD_MIN else '')
             streak_bar_html = f"""
               <div class="match-streak-pill-bar">
                 {w_pill}
                 <span class="streak-pill {s_info['fav_cls']}">{s_info['fav_tag']}</span>
                 <span class="streak-pill {s_info['h_cls']}">{s_info['h_tag']}</span>
+                {h_pd_pill}
                 <span class="streak-pill {s_info['uo_cls']}">{s_info['uo_tag']}</span>
+                {uo_pd_pill}
               </div>"""
 
         std = m["handicap"]["standard"]
@@ -139,7 +252,7 @@ def render_match_cards(matches_desc, running_streaks_map, focus_team=None):
               </div>
               <div class="score-container">
                 <div class="score-box" style="color: {'var(--text-white)' if is_completed else 'var(--text-sub)'}">
-                  {m['set_score']}
+                  {m['set_score'] if m.get('set_score') else '-'}
                 </div>
                 {f'<div class="score-detail">{sets_str}</div>' if sets_str else ''}
               </div>
@@ -229,6 +342,7 @@ def render_team_view_pane(view_id, matches, team):
     fav_streak, fav_type = 0, None
     h_streak, h_type = 0, None
     uo_streak, uo_type = 0, None
+    h_hist, uo_hist = [], []
     running_streaks_map = {}
 
     for m in completed:
@@ -274,7 +388,14 @@ def render_team_view_pane(view_id, matches, team):
         if res_uo == uo_type: uo_streak += 1
         else: uo_type = res_uo; uo_streak = 1
 
+        h_hist.append(res_h)
+        uo_hist.append(res_uo)
+        h_alt = alt_run_len(h_hist)
+        uo_alt = alt_run_len(uo_hist)
+
         running_streaks_map[m["id"]] = {
+            "h_alt": h_alt,
+            "uo_alt": uo_alt,
             "w_tag": f"{w_streak}연승 🔥" if w_type == "W" else f"{w_streak}연패 🧊",
             "w_cls": "pill-fire" if w_type == "W" else "pill-ice",
             "fav_tag": f"{fav_streak}연속 {fav_type} {'🎯' if fav_type == '정배' else '⚡'}",
@@ -318,6 +439,11 @@ def render_team_view_pane(view_id, matches, team):
         uo_pill_cls = "pill-orange" if uo_type == "OVER" else "pill-ice"
         uo_badge_lbl = "🔥 오버" if uo_type == "OVER" else "🧊 언더"
 
+    pd_cards_html = (
+        pd_card_html("세트 핸디 퐁당", "마핸↔플핸", alt_run_len(h_hist), h_hist, HANDI_SYM, HANDI_FS, h_streak, h_type) +
+        pd_card_html("총득점 퐁당", "언더↔오버", alt_run_len(uo_hist), uo_hist, UO_SYM, UO_FS, uo_streak, UO_KO.get(uo_type, uo_type))
+    )
+
     cards_html = render_match_cards(desc, running_streaks_map, focus_team=team)
 
     return f"""
@@ -356,6 +482,7 @@ def render_team_view_pane(view_id, matches, team):
             </div>
             <div class="streak-val">{uo_txt}</div>
           </div>
+          {pd_cards_html}
         </div>
       </div>
 
@@ -405,7 +532,7 @@ def render_team_view_pane(view_id, matches, team):
       </div>
     </div>"""
 
-def render_all_view_pane(view_id, league_key, matches):
+def render_all_view_pane(view_id, league_key, matches, teams):
     league_name = "남자부" if league_key == "mens" else "여자부"
     chrono = sorted(matches, key=lambda x: x.get("date", ""))
     desc = sorted(matches, key=lambda x: x.get("date", ""), reverse=True)
@@ -417,6 +544,7 @@ def render_all_view_pane(view_id, league_key, matches):
     fav_streak, fav_type = 0, None
     h_streak, h_type = 0, None
     uo_streak, uo_type = 0, None
+    h_hist, uo_hist = [], []
     running_streaks_map = {}
 
     for m in completed:
@@ -437,7 +565,12 @@ def render_all_view_pane(view_id, league_key, matches):
         if res_uo == uo_type: uo_streak += 1
         else: uo_type = res_uo; uo_streak = 1
 
+        h_hist.append(res_h)
+        uo_hist.append(res_uo)
+
         running_streaks_map[m["id"]] = {
+            "h_alt": alt_run_len(h_hist),
+            "uo_alt": alt_run_len(uo_hist),
             "w_tag": "",
             "w_cls": "",
             "fav_tag": f"{fav_streak}연속 {fav_type} {'🎯' if is_fav else '⚡'}",
@@ -474,6 +607,12 @@ def render_all_view_pane(view_id, league_key, matches):
         uo_card_cls = "streak-card-orange" if uo_type == "OVER" else "streak-card-ice"
         uo_pill_cls = "pill-orange" if uo_type == "OVER" else "pill-ice"
         uo_badge_lbl = "🔥 오버" if uo_type == "OVER" else "🧊 언더"
+
+    pd_cards_html = (
+        pd_card_html("리그 핸디 퐁당", "마핸↔플핸", alt_run_len(h_hist), h_hist, HANDI_SYM, HANDI_FS, h_streak, h_type) +
+        pd_card_html("리그 언오버 퐁당", "언더↔오버", alt_run_len(uo_hist), uo_hist, UO_SYM, UO_FS, uo_streak, UO_KO.get(uo_type, uo_type))
+    )
+    pd_teams_box = render_pd_teams_box(teams, matches)
 
     cards_html = render_match_cards(desc, running_streaks_map, focus_team=None)
 
@@ -513,8 +652,11 @@ def render_all_view_pane(view_id, league_key, matches):
             </div>
             <div class="streak-val">{uo_txt}</div>
           </div>
+          {pd_cards_html}
         </div>
       </div>
+
+      {pd_teams_box}
 
       <div class="stats-grid">
         <div class="stat-card">
@@ -568,11 +710,11 @@ team_panels_html = (
 views_html_parts = []
 for idx, t in enumerate(MENS_TEAMS):
     views_html_parts.append(render_team_view_pane(f"view-mens-{idx}", mens_matches, t))
-views_html_parts.append(render_all_view_pane("view-mens-all", "mens", mens_matches))
+views_html_parts.append(render_all_view_pane("view-mens-all", "mens", mens_matches, MENS_TEAMS))
 
 for idx, t in enumerate(WOMENS_TEAMS):
     views_html_parts.append(render_team_view_pane(f"view-womens-{idx}", womens_matches, t))
-views_html_parts.append(render_all_view_pane("view-womens-all", "womens", womens_matches))
+views_html_parts.append(render_all_view_pane("view-womens-all", "womens", womens_matches, WOMENS_TEAMS))
 
 views_html = "".join(views_html_parts)
 
@@ -1095,6 +1237,119 @@ html = f"""<!DOCTYPE html>
       background: #1e293b;
       color: #94a3b8;
       border: 1px solid #334155;
+    }}
+
+    /* 퐁당(교대) 패턴 */
+    .pill-pd {{
+      background: linear-gradient(135deg, #0d9488, #7c3aed);
+      color: #ffffff;
+      border: 1px solid #5eead4;
+      box-shadow: 0 0 8px rgba(94, 234, 212, 0.35);
+    }}
+
+    .streak-card-pd {{
+      background: linear-gradient(135deg, rgba(13, 148, 136, 0.2), rgba(124, 58, 237, 0.24));
+      border-color: #2dd4bf;
+      box-shadow: 0 0 12px rgba(45, 212, 191, 0.25);
+    }}
+    .streak-card-pd .streak-val {{ color: #99f6e4; }}
+
+    .streak-card-plain {{
+      background: #131c2b;
+      border-color: #2b3e59;
+    }}
+    .streak-card-plain .streak-val {{ color: #cbd5e1; }}
+
+    .pd-flow {{
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 3px;
+      margin-top: 1px;
+    }}
+
+    .pd-flow-lbl {{
+      font-size: 9px;
+      color: var(--text-sub);
+      font-weight: 700;
+      margin-right: 2px;
+    }}
+
+    .fs {{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 17px;
+      height: 17px;
+      padding: 0 3px;
+      border-radius: 4px;
+      font-size: 9.5px;
+      font-weight: 800;
+      line-height: 1;
+    }}
+    .fs-ma {{ background: rgba(192, 132, 252, 0.16); color: #c084fc; border: 1px solid rgba(192, 132, 252, 0.35); }}
+    .fs-pl {{ background: rgba(52, 211, 153, 0.14); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.3); }}
+    .fs-over {{ background: rgba(251, 191, 36, 0.14); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.35); }}
+    .fs-under {{ background: rgba(129, 140, 248, 0.14); color: #818cf8; border: 1px solid rgba(129, 140, 248, 0.35); }}
+    .fs-latest {{ box-shadow: 0 0 0 1.5px rgba(248, 250, 252, 0.55); }}
+
+    .pd-teams-box {{
+      border: 1px solid #2a4a5c;
+      background: linear-gradient(135deg, rgba(13, 148, 136, 0.12), rgba(124, 58, 237, 0.12));
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 16px;
+    }}
+
+    .pd-teams-head {{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }}
+
+    .pd-teams-title {{
+      font-size: 13px;
+      font-weight: 800;
+      color: #99f6e4;
+    }}
+
+    .pd-teams-sub {{
+      font-size: 10px;
+      color: var(--text-sub);
+      font-weight: 700;
+    }}
+
+    .pd-teams-chips {{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }}
+
+    .pd-chip {{
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #0b101a;
+      border: 1px solid #1e3050;
+      border-radius: 8px;
+      padding: 4px 7px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-white);
+    }}
+    .pd-chip-ma {{ border-color: #6d28d9; box-shadow: inset 2px 0 0 #a855f7; }}
+    .pd-chip-uo {{ border-color: #0f766e; box-shadow: inset 2px 0 0 #2dd4bf; }}
+    .pd-chip-team {{ font-weight: 800; color: #f8fafc; }}
+    .pd-chip-tag {{ font-size: 10px; color: var(--text-muted); }}
+    .pd-chip-flow {{ display: inline-flex; gap: 2px; }}
+    .pd-chip-flow .fs {{ min-width: 15px; height: 15px; font-size: 9px; }}
+
+    .pd-teams-empty {{
+      font-size: 11.5px;
+      color: var(--text-muted);
     }}
 
     .streak-cell-badge {{

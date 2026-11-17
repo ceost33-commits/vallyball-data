@@ -519,6 +519,119 @@
       border: 1px solid #334155;
     }
 
+    /* 퐁당(교대) 패턴 */
+    .pill-pd {
+      background: linear-gradient(135deg, #0d9488, #7c3aed);
+      color: #ffffff;
+      border: 1px solid #5eead4;
+      box-shadow: 0 0 8px rgba(94, 234, 212, 0.35);
+    }
+
+    .streak-card-pd {
+      background: linear-gradient(135deg, rgba(13, 148, 136, 0.2), rgba(124, 58, 237, 0.24));
+      border-color: #2dd4bf;
+      box-shadow: 0 0 12px rgba(45, 212, 191, 0.25);
+    }
+    .streak-card-pd .streak-val { color: #99f6e4; }
+
+    .streak-card-plain {
+      background: #131c2b;
+      border-color: #2b3e59;
+    }
+    .streak-card-plain .streak-val { color: #cbd5e1; }
+
+    .pd-flow {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 3px;
+      margin-top: 1px;
+    }
+
+    .pd-flow-lbl {
+      font-size: 9px;
+      color: var(--text-sub);
+      font-weight: 700;
+      margin-right: 2px;
+    }
+
+    .fs {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 17px;
+      height: 17px;
+      padding: 0 3px;
+      border-radius: 4px;
+      font-size: 9.5px;
+      font-weight: 800;
+      line-height: 1;
+    }
+    .fs-ma { background: rgba(192, 132, 252, 0.16); color: #c084fc; border: 1px solid rgba(192, 132, 252, 0.35); }
+    .fs-pl { background: rgba(52, 211, 153, 0.14); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.3); }
+    .fs-over { background: rgba(251, 191, 36, 0.14); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.35); }
+    .fs-under { background: rgba(129, 140, 248, 0.14); color: #818cf8; border: 1px solid rgba(129, 140, 248, 0.35); }
+    .fs-latest { box-shadow: 0 0 0 1.5px rgba(248, 250, 252, 0.55); }
+
+    .pd-teams-box {
+      border: 1px solid #2a4a5c;
+      background: linear-gradient(135deg, rgba(13, 148, 136, 0.12), rgba(124, 58, 237, 0.12));
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 16px;
+    }
+
+    .pd-teams-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+
+    .pd-teams-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: #99f6e4;
+    }
+
+    .pd-teams-sub {
+      font-size: 10px;
+      color: var(--text-sub);
+      font-weight: 700;
+    }
+
+    .pd-teams-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .pd-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #0b101a;
+      border: 1px solid #1e3050;
+      border-radius: 8px;
+      padding: 4px 7px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-white);
+    }
+    .pd-chip-ma { border-color: #6d28d9; box-shadow: inset 2px 0 0 #a855f7; }
+    .pd-chip-uo { border-color: #0f766e; box-shadow: inset 2px 0 0 #2dd4bf; }
+    .pd-chip-team { font-weight: 800; color: #f8fafc; }
+    .pd-chip-tag { font-size: 10px; color: var(--text-muted); }
+    .pd-chip-flow { display: inline-flex; gap: 2px; }
+    .pd-chip-flow .fs { min-width: 15px; height: 15px; font-size: 9px; }
+
+    .pd-teams-empty {
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+
     .streak-cell-badge {
       font-size: 10px;
       font-weight: 800;
@@ -977,6 +1090,7 @@
             </div>
             <div class="streak-val">1연속 언더 진행 🧊</div>
           </div>
+          <div class="streak-card streak-card-plain"><div class="streak-card-top"><span class="streak-label">세트 핸디 퐁당</span><span class="streak-badge-pill pill-gray">퐁당 없음</span></div><div class="streak-val">2연속 마핸 유지</div><div class="pd-flow"><span class="pd-flow-lbl">최근 4경기</span><span class="fs fs-pl">플</span><span class="fs fs-pl">플</span><span class="fs fs-ma">마</span><span class="fs fs-ma fs-latest">마</span></div></div><div class="streak-card streak-card-plain"><div class="streak-card-top"><span class="streak-label">총득점 퐁당</span><span class="streak-badge-pill pill-gray">퐁당 없음</span></div><div class="streak-val">2경기 교대 · 퐁당 아님</div><div class="pd-flow"><span class="pd-flow-lbl">최근 4경기</span><span class="fs fs-under">언</span><span class="fs fs-over">오</span><span class="fs fs-over">오</span><span class="fs fs-under fs-latest">언</span></div></div>
         </div>
       </div>
 
@@ -1039,7 +1153,7 @@
               </div>
               <div class="score-container">
                 <div class="score-box" style="color: var(--text-sub)">
-                  None
+                  -
                 </div>
                 
               </div>
@@ -1121,7 +1235,9 @@
                 <span class="streak-pill pill-fire">3연승 🔥</span>
                 <span class="streak-pill pill-green">2연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">2연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-ice">1연속 언더 🧊</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box focused">
@@ -1212,7 +1328,9 @@
                 <span class="streak-pill pill-fire">2연승 🔥</span>
                 <span class="streak-pill pill-green">1연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">1연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-orange">2연속 오버 🔥</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -1303,7 +1421,9 @@
                 <span class="streak-pill pill-fire">1연승 🔥</span>
                 <span class="streak-pill pill-fire">2연속 역배 ⚡</span>
                 <span class="streak-pill pill-green">2연속 플핸 🛡️</span>
+                
                 <span class="streak-pill pill-orange">1연속 오버 🔥</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -1394,7 +1514,9 @@
                 <span class="streak-pill pill-ice">1연패 🧊</span>
                 <span class="streak-pill pill-fire">1연속 역배 ⚡</span>
                 <span class="streak-pill pill-green">1연속 플핸 🛡️</span>
+                
                 <span class="streak-pill pill-ice">1연속 언더 🧊</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box focused">
@@ -1509,6 +1631,7 @@
             </div>
             <div class="streak-val">2연속 언더 진행 🧊</div>
           </div>
+          <div class="streak-card streak-card-plain"><div class="streak-card-top"><span class="streak-label">세트 핸디 퐁당</span><span class="streak-badge-pill pill-gray">퐁당 없음</span></div><div class="streak-val">5연속 마핸 유지</div><div class="pd-flow"><span class="pd-flow-lbl">최근 5경기</span><span class="fs fs-ma">마</span><span class="fs fs-ma">마</span><span class="fs fs-ma">마</span><span class="fs fs-ma">마</span><span class="fs fs-ma fs-latest">마</span></div></div><div class="streak-card streak-card-plain"><div class="streak-card-top"><span class="streak-label">총득점 퐁당</span><span class="streak-badge-pill pill-gray">퐁당 없음</span></div><div class="streak-val">2연속 언더 유지</div><div class="pd-flow"><span class="pd-flow-lbl">최근 5경기</span><span class="fs fs-under">언</span><span class="fs fs-over">오</span><span class="fs fs-over">오</span><span class="fs fs-under">언</span><span class="fs fs-under fs-latest">언</span></div></div>
         </div>
       </div>
 
@@ -1568,7 +1691,9 @@
                 <span class="streak-pill pill-fire">4연승 🔥</span>
                 <span class="streak-pill pill-green">5연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">5연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-ice">2연속 언더 🧊</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -1659,7 +1784,9 @@
                 <span class="streak-pill pill-fire">3연승 🔥</span>
                 <span class="streak-pill pill-green">4연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">4연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-ice">1연속 언더 🧊</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -1750,7 +1877,9 @@
                 <span class="streak-pill pill-fire">2연승 🔥</span>
                 <span class="streak-pill pill-green">3연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">3연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-orange">2연속 오버 🔥</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box focused">
@@ -1841,7 +1970,9 @@
                 <span class="streak-pill pill-fire">1연승 🔥</span>
                 <span class="streak-pill pill-green">2연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">2연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-orange">1연속 오버 🔥</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -1932,7 +2063,9 @@
                 <span class="streak-pill pill-ice">1연패 🧊</span>
                 <span class="streak-pill pill-green">1연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">1연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-ice">1연속 언더 🧊</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -2047,6 +2180,7 @@
             </div>
             <div class="streak-val">3연속 오버 진행 🔥</div>
           </div>
+          <div class="streak-card streak-card-plain"><div class="streak-card-top"><span class="streak-label">세트 핸디 퐁당</span><span class="streak-badge-pill pill-gray">퐁당 없음</span></div><div class="streak-val">3연속 플핸 유지</div><div class="pd-flow"><span class="pd-flow-lbl">최근 4경기</span><span class="fs fs-ma">마</span><span class="fs fs-pl">플</span><span class="fs fs-pl">플</span><span class="fs fs-pl fs-latest">플</span></div></div><div class="streak-card streak-card-plain"><div class="streak-card-top"><span class="streak-label">총득점 퐁당</span><span class="streak-badge-pill pill-gray">퐁당 없음</span></div><div class="streak-val">3연속 오버 유지</div><div class="pd-flow"><span class="pd-flow-lbl">최근 4경기</span><span class="fs fs-under">언</span><span class="fs fs-over">오</span><span class="fs fs-over">오</span><span class="fs fs-over fs-latest">오</span></div></div>
         </div>
       </div>
 
@@ -2106,7 +2240,9 @@
                 <span class="streak-pill pill-ice">3연패 🧊</span>
                 <span class="streak-pill pill-fire">3연속 역배 ⚡</span>
                 <span class="streak-pill pill-green">3연속 플핸 🛡️</span>
+                
                 <span class="streak-pill pill-orange">3연속 오버 🔥</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box focused">
@@ -2197,7 +2333,9 @@
                 <span class="streak-pill pill-ice">2연패 🧊</span>
                 <span class="streak-pill pill-fire">2연속 역배 ⚡</span>
                 <span class="streak-pill pill-green">2연속 플핸 🛡️</span>
+                
                 <span class="streak-pill pill-orange">2연속 오버 🔥</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -2288,7 +2426,9 @@
                 <span class="streak-pill pill-ice">1연패 🧊</span>
                 <span class="streak-pill pill-fire">1연속 역배 ⚡</span>
                 <span class="streak-pill pill-green">1연속 플핸 🛡️</span>
+                
                 <span class="streak-pill pill-orange">1연속 오버 🔥</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box focused">
@@ -2379,7 +2519,9 @@
                 <span class="streak-pill pill-fire">1연승 🔥</span>
                 <span class="streak-pill pill-green">1연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">1연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-ice">1연속 언더 🧊</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box focused">
@@ -2494,6 +2636,7 @@
             </div>
             <div class="streak-val">1연속 언더 진행 🧊</div>
           </div>
+          <div class="streak-card streak-card-plain"><div class="streak-card-top"><span class="streak-label">세트 핸디 퐁당</span><span class="streak-badge-pill pill-gray">퐁당 없음</span></div><div class="streak-val">2경기 교대 · 퐁당 아님</div><div class="pd-flow"><span class="pd-flow-lbl">최근 4경기</span><span class="fs fs-pl">플</span><span class="fs fs-pl">플</span><span class="fs fs-pl">플</span><span class="fs fs-ma fs-latest">마</span></div></div><div class="streak-card streak-card-pd"><div class="streak-card-top"><span class="streak-label">총득점 퐁당</span><span class="streak-badge-pill pill-pd">🔄 퐁당</span></div><div class="streak-val">3연속 퐁당 (언더↔오버)</div><div class="pd-flow"><span class="pd-flow-lbl">최근 4경기</span><span class="fs fs-under">언</span><span class="fs fs-under">언</span><span class="fs fs-over">오</span><span class="fs fs-under fs-latest">언</span></div></div>
         </div>
       </div>
 
@@ -2553,7 +2696,9 @@
                 <span class="streak-pill pill-ice">1연패 🧊</span>
                 <span class="streak-pill pill-green">1연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">1연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-ice">1연속 언더 🧊</span>
+                <span class="streak-pill pill-pd">🔄 언↔오 3연속 퐁당</span>
               </div>
             <div class="match-fixture">
               <div class="team-box focused">
@@ -2644,7 +2789,9 @@
                 <span class="streak-pill pill-fire">3연승 🔥</span>
                 <span class="streak-pill pill-fire">3연속 역배 ⚡</span>
                 <span class="streak-pill pill-green">3연속 플핸 🛡️</span>
+                
                 <span class="streak-pill pill-orange">1연속 오버 🔥</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box focused">
@@ -2735,7 +2882,9 @@
                 <span class="streak-pill pill-fire">2연승 🔥</span>
                 <span class="streak-pill pill-fire">2연속 역배 ⚡</span>
                 <span class="streak-pill pill-green">2연속 플핸 🛡️</span>
+                
                 <span class="streak-pill pill-ice">2연속 언더 🧊</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -2826,7 +2975,9 @@
                 <span class="streak-pill pill-fire">1연승 🔥</span>
                 <span class="streak-pill pill-fire">1연속 역배 ⚡</span>
                 <span class="streak-pill pill-green">1연속 플핸 🛡️</span>
+                
                 <span class="streak-pill pill-ice">1연속 언더 🧊</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -2941,6 +3092,7 @@
             </div>
             <div class="streak-val">1연속 언더 진행 🧊</div>
           </div>
+          <div class="streak-card streak-card-plain"><div class="streak-card-top"><span class="streak-label">세트 핸디 퐁당</span><span class="streak-badge-pill pill-gray">퐁당 없음</span></div><div class="streak-val">3연속 마핸 유지</div><div class="pd-flow"><span class="pd-flow-lbl">최근 4경기</span><span class="fs fs-pl">플</span><span class="fs fs-ma">마</span><span class="fs fs-ma">마</span><span class="fs fs-ma fs-latest">마</span></div></div><div class="streak-card streak-card-pd"><div class="streak-card-top"><span class="streak-label">총득점 퐁당</span><span class="streak-badge-pill pill-pd">🔄 퐁당</span></div><div class="streak-val">4연속 퐁당 (언더↔오버)</div><div class="pd-flow"><span class="pd-flow-lbl">최근 4경기</span><span class="fs fs-over">오</span><span class="fs fs-under">언</span><span class="fs fs-over">오</span><span class="fs fs-under fs-latest">언</span></div></div>
         </div>
       </div>
 
@@ -3000,7 +3152,9 @@
                 <span class="streak-pill pill-ice">4연패 🧊</span>
                 <span class="streak-pill pill-green">3연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">3연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-ice">1연속 언더 🧊</span>
+                <span class="streak-pill pill-pd">🔄 언↔오 4연속 퐁당</span>
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -3091,7 +3245,9 @@
                 <span class="streak-pill pill-ice">3연패 🧊</span>
                 <span class="streak-pill pill-green">2연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">2연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-orange">1연속 오버 🔥</span>
+                <span class="streak-pill pill-pd">🔄 언↔오 3연속 퐁당</span>
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -3182,7 +3338,9 @@
                 <span class="streak-pill pill-ice">2연패 🧊</span>
                 <span class="streak-pill pill-green">1연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">1연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-ice">1연속 언더 🧊</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box focused">
@@ -3273,7 +3431,9 @@
                 <span class="streak-pill pill-ice">1연패 🧊</span>
                 <span class="streak-pill pill-fire">1연속 역배 ⚡</span>
                 <span class="streak-pill pill-green">1연속 플핸 🛡️</span>
+                
                 <span class="streak-pill pill-orange">1연속 오버 🔥</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box focused">
@@ -3388,6 +3548,7 @@
             </div>
             <div class="streak-val">4연속 오버 진행 🔥</div>
           </div>
+          <div class="streak-card streak-card-plain"><div class="streak-card-top"><span class="streak-label">세트 핸디 퐁당</span><span class="streak-badge-pill pill-gray">퐁당 없음</span></div><div class="streak-val">2경기 교대 · 퐁당 아님</div><div class="pd-flow"><span class="pd-flow-lbl">최근 4경기</span><span class="fs fs-pl">플</span><span class="fs fs-ma">마</span><span class="fs fs-ma">마</span><span class="fs fs-pl fs-latest">플</span></div></div><div class="streak-card streak-card-plain"><div class="streak-card-top"><span class="streak-label">총득점 퐁당</span><span class="streak-badge-pill pill-gray">퐁당 없음</span></div><div class="streak-val">4연속 오버 유지</div><div class="pd-flow"><span class="pd-flow-lbl">최근 4경기</span><span class="fs fs-over">오</span><span class="fs fs-over">오</span><span class="fs fs-over">오</span><span class="fs fs-over fs-latest">오</span></div></div>
         </div>
       </div>
 
@@ -3447,7 +3608,9 @@
                 <span class="streak-pill pill-fire">1연승 🔥</span>
                 <span class="streak-pill pill-fire">1연속 역배 ⚡</span>
                 <span class="streak-pill pill-green">1연속 플핸 🛡️</span>
+                
                 <span class="streak-pill pill-orange">4연속 오버 🔥</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -3538,7 +3701,9 @@
                 <span class="streak-pill pill-ice">2연패 🧊</span>
                 <span class="streak-pill pill-green">2연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">2연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-orange">3연속 오버 🔥</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box focused">
@@ -3629,7 +3794,9 @@
                 <span class="streak-pill pill-ice">1연패 🧊</span>
                 <span class="streak-pill pill-green">1연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">1연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-orange">2연속 오버 🔥</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box focused">
@@ -3720,7 +3887,9 @@
                 <span class="streak-pill pill-fire">1연승 🔥</span>
                 <span class="streak-pill pill-fire">1연속 역배 ⚡</span>
                 <span class="streak-pill pill-green">1연속 플핸 🛡️</span>
+                
                 <span class="streak-pill pill-orange">1연속 오버 🔥</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -3835,6 +4004,7 @@
             </div>
             <div class="streak-val">3연속 언더 진행 🧊</div>
           </div>
+          <div class="streak-card streak-card-pd"><div class="streak-card-top"><span class="streak-label">세트 핸디 퐁당</span><span class="streak-badge-pill pill-pd">🔄 퐁당</span></div><div class="streak-val">3연속 퐁당 (마핸↔플핸)</div><div class="pd-flow"><span class="pd-flow-lbl">최근 3경기</span><span class="fs fs-ma">마</span><span class="fs fs-pl">플</span><span class="fs fs-ma fs-latest">마</span></div></div><div class="streak-card streak-card-plain"><div class="streak-card-top"><span class="streak-label">총득점 퐁당</span><span class="streak-badge-pill pill-gray">퐁당 없음</span></div><div class="streak-val">3연속 언더 유지</div><div class="pd-flow"><span class="pd-flow-lbl">최근 3경기</span><span class="fs fs-under">언</span><span class="fs fs-under">언</span><span class="fs fs-under fs-latest">언</span></div></div>
         </div>
       </div>
 
@@ -3897,7 +4067,7 @@
               </div>
               <div class="score-container">
                 <div class="score-box" style="color: var(--text-sub)">
-                  None
+                  -
                 </div>
                 
               </div>
@@ -3979,7 +4149,9 @@
                 <span class="streak-pill pill-ice">2연패 🧊</span>
                 <span class="streak-pill pill-green">1연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">1연속 마핸 ⚡</span>
+                <span class="streak-pill pill-pd">🔄 마↔플 3연속 퐁당</span>
                 <span class="streak-pill pill-ice">3연속 언더 🧊</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box focused">
@@ -4070,7 +4242,9 @@
                 <span class="streak-pill pill-ice">1연패 🧊</span>
                 <span class="streak-pill pill-fire">1연속 역배 ⚡</span>
                 <span class="streak-pill pill-green">1연속 플핸 🛡️</span>
+                
                 <span class="streak-pill pill-ice">2연속 언더 🧊</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box focused">
@@ -4161,7 +4335,9 @@
                 <span class="streak-pill pill-fire">1연승 🔥</span>
                 <span class="streak-pill pill-green">1연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">1연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-ice">1연속 언더 🧊</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -4276,7 +4452,17 @@
             </div>
             <div class="streak-val">1경기 연속 언더 행진 🧊</div>
           </div>
+          <div class="streak-card streak-card-pd"><div class="streak-card-top"><span class="streak-label">리그 핸디 퐁당</span><span class="streak-badge-pill pill-pd">🔄 퐁당</span></div><div class="streak-val">3연속 퐁당 (마핸↔플핸)</div><div class="pd-flow"><span class="pd-flow-lbl">최근 6경기</span><span class="fs fs-ma">마</span><span class="fs fs-pl">플</span><span class="fs fs-ma">마</span><span class="fs fs-ma">마</span><span class="fs fs-pl">플</span><span class="fs fs-ma fs-latest">마</span></div></div><div class="streak-card streak-card-pd"><div class="streak-card-top"><span class="streak-label">리그 언오버 퐁당</span><span class="streak-badge-pill pill-pd">🔄 퐁당</span></div><div class="streak-val">3연속 퐁당 (언더↔오버)</div><div class="pd-flow"><span class="pd-flow-lbl">최근 6경기</span><span class="fs fs-over">오</span><span class="fs fs-over">오</span><span class="fs fs-under">언</span><span class="fs fs-under">언</span><span class="fs fs-over">오</span><span class="fs fs-under fs-latest">언</span></div></div>
         </div>
+      </div>
+
+      
+      <div class="pd-teams-box">
+        <div class="pd-teams-head">
+          <span class="pd-teams-title">🔄 현재 퐁당 진행 중 구단</span>
+          <span class="pd-teams-sub">3경기 이상 교대 · 3건</span>
+        </div>
+        <div class="pd-teams-chips"><span class="pd-chip pd-chip-uo"><span class="pd-chip-team">KB손해보험</span><span class="pd-chip-tag">언↔오 4</span><span class="pd-chip-flow"><span class="fs fs-over">오</span><span class="fs fs-under">언</span><span class="fs fs-over">오</span><span class="fs fs-under fs-latest">언</span></span></span><span class="pd-chip pd-chip-ma"><span class="pd-chip-team">OK저축은행</span><span class="pd-chip-tag">마↔플 3</span><span class="pd-chip-flow"><span class="fs fs-ma">마</span><span class="fs fs-pl">플</span><span class="fs fs-ma fs-latest">마</span></span></span><span class="pd-chip pd-chip-uo"><span class="pd-chip-team">우리카드</span><span class="pd-chip-tag">언↔오 3</span><span class="pd-chip-flow"><span class="fs fs-under">언</span><span class="fs fs-under">언</span><span class="fs fs-over">오</span><span class="fs fs-under fs-latest">언</span></span></span></div>
       </div>
 
       <div class="stats-grid">
@@ -4333,7 +4519,7 @@
               </div>
               <div class="score-container">
                 <div class="score-box" style="color: var(--text-sub)">
-                  None
+                  -
                 </div>
                 
               </div>
@@ -4415,7 +4601,9 @@
                 
                 <span class="streak-pill pill-green">1연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">1연속 마핸 ⚡</span>
+                <span class="streak-pill pill-pd">🔄 마↔플 3연속 퐁당</span>
                 <span class="streak-pill pill-ice">1연속 언더 🧊</span>
+                <span class="streak-pill pill-pd">🔄 언↔오 3연속 퐁당</span>
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -4506,7 +4694,9 @@
                 
                 <span class="streak-pill pill-fire">1연속 역배 ⚡</span>
                 <span class="streak-pill pill-green">1연속 플핸 🛡️</span>
+                
                 <span class="streak-pill pill-orange">1연속 오버 🔥</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -4597,7 +4787,9 @@
                 
                 <span class="streak-pill pill-green">2연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">2연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-ice">2연속 언더 🧊</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -4688,7 +4880,9 @@
                 
                 <span class="streak-pill pill-green">1연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">1연속 마핸 ⚡</span>
+                <span class="streak-pill pill-pd">🔄 마↔플 3연속 퐁당</span>
                 <span class="streak-pill pill-ice">1연속 언더 🧊</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -4779,7 +4973,9 @@
                 
                 <span class="streak-pill pill-fire">1연속 역배 ⚡</span>
                 <span class="streak-pill pill-green">1연속 플핸 🛡️</span>
+                
                 <span class="streak-pill pill-orange">3연속 오버 🔥</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -4870,7 +5066,9 @@
                 
                 <span class="streak-pill pill-green">2연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">2연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-orange">2연속 오버 🔥</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -4961,7 +5159,9 @@
                 
                 <span class="streak-pill pill-green">1연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">1연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-orange">1연속 오버 🔥</span>
+                <span class="streak-pill pill-pd">🔄 언↔오 3연속 퐁당</span>
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -5052,7 +5252,9 @@
                 
                 <span class="streak-pill pill-fire">2연속 역배 ⚡</span>
                 <span class="streak-pill pill-green">2연속 플핸 🛡️</span>
+                
                 <span class="streak-pill pill-ice">1연속 언더 🧊</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -5143,7 +5345,9 @@
                 
                 <span class="streak-pill pill-fire">1연속 역배 ⚡</span>
                 <span class="streak-pill pill-green">1연속 플핸 🛡️</span>
+                
                 <span class="streak-pill pill-orange">2연속 오버 🔥</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -5234,7 +5438,9 @@
                 
                 <span class="streak-pill pill-green">2연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">2연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-orange">1연속 오버 🔥</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -5325,7 +5531,9 @@
                 
                 <span class="streak-pill pill-green">1연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">1연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-ice">2연속 언더 🧊</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -5416,7 +5624,9 @@
                 
                 <span class="streak-pill pill-fire">2연속 역배 ⚡</span>
                 <span class="streak-pill pill-green">2연속 플핸 🛡️</span>
+                
                 <span class="streak-pill pill-ice">1연속 언더 🧊</span>
+                <span class="streak-pill pill-pd">🔄 언↔오 3연속 퐁당</span>
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -5507,7 +5717,9 @@
                 
                 <span class="streak-pill pill-fire">1연속 역배 ⚡</span>
                 <span class="streak-pill pill-green">1연속 플핸 🛡️</span>
+                
                 <span class="streak-pill pill-orange">1연속 오버 🔥</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -5598,7 +5810,9 @@
                 
                 <span class="streak-pill pill-green">1연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">1연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-ice">1연속 언더 🧊</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -5713,6 +5927,7 @@
             </div>
             <div class="streak-val">1연속 언더 진행 🧊</div>
           </div>
+          <div class="streak-card streak-card-plain"><div class="streak-card-top"><span class="streak-label">세트 핸디 퐁당</span><span class="streak-badge-pill pill-gray">퐁당 없음</span></div><div class="streak-val">4연속 마핸 유지</div><div class="pd-flow"><span class="pd-flow-lbl">최근 4경기</span><span class="fs fs-ma">마</span><span class="fs fs-ma">마</span><span class="fs fs-ma">마</span><span class="fs fs-ma fs-latest">마</span></div></div><div class="streak-card streak-card-pd"><div class="streak-card-top"><span class="streak-label">총득점 퐁당</span><span class="streak-badge-pill pill-pd">🔄 퐁당</span></div><div class="streak-val">3연속 퐁당 (언더↔오버)</div><div class="pd-flow"><span class="pd-flow-lbl">최근 4경기</span><span class="fs fs-under">언</span><span class="fs fs-under">언</span><span class="fs fs-over">오</span><span class="fs fs-under fs-latest">언</span></div></div>
         </div>
       </div>
 
@@ -5772,7 +5987,9 @@
                 <span class="streak-pill pill-ice">2연패 🧊</span>
                 <span class="streak-pill pill-green">4연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">4연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-ice">1연속 언더 🧊</span>
+                <span class="streak-pill pill-pd">🔄 언↔오 3연속 퐁당</span>
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -5863,7 +6080,9 @@
                 <span class="streak-pill pill-ice">1연패 🧊</span>
                 <span class="streak-pill pill-green">3연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">3연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-orange">1연속 오버 🔥</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -5954,7 +6173,9 @@
                 <span class="streak-pill pill-fire">2연승 🔥</span>
                 <span class="streak-pill pill-green">2연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">2연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-ice">2연속 언더 🧊</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box focused">
@@ -6045,7 +6266,9 @@
                 <span class="streak-pill pill-fire">1연승 🔥</span>
                 <span class="streak-pill pill-green">1연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">1연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-ice">1연속 언더 🧊</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box focused">
@@ -6160,6 +6383,7 @@
             </div>
             <div class="streak-val">2연속 언더 진행 🧊</div>
           </div>
+          <div class="streak-card streak-card-plain"><div class="streak-card-top"><span class="streak-label">세트 핸디 퐁당</span><span class="streak-badge-pill pill-gray">퐁당 없음</span></div><div class="streak-val">3연속 마핸 유지</div><div class="pd-flow"><span class="pd-flow-lbl">최근 5경기</span><span class="fs fs-ma">마</span><span class="fs fs-pl">플</span><span class="fs fs-ma">마</span><span class="fs fs-ma">마</span><span class="fs fs-ma fs-latest">마</span></div></div><div class="streak-card streak-card-plain"><div class="streak-card-top"><span class="streak-label">총득점 퐁당</span><span class="streak-badge-pill pill-gray">퐁당 없음</span></div><div class="streak-val">2연속 언더 유지</div><div class="pd-flow"><span class="pd-flow-lbl">최근 5경기</span><span class="fs fs-under">언</span><span class="fs fs-over">오</span><span class="fs fs-over">오</span><span class="fs fs-under">언</span><span class="fs fs-under fs-latest">언</span></div></div>
         </div>
       </div>
 
@@ -6219,7 +6443,9 @@
                 <span class="streak-pill pill-fire">4연승 🔥</span>
                 <span class="streak-pill pill-green">5연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">3연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-ice">2연속 언더 🧊</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -6310,7 +6536,9 @@
                 <span class="streak-pill pill-fire">3연승 🔥</span>
                 <span class="streak-pill pill-green">4연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">2연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-ice">1연속 언더 🧊</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -6401,7 +6629,9 @@
                 <span class="streak-pill pill-fire">2연승 🔥</span>
                 <span class="streak-pill pill-green">3연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">1연속 마핸 ⚡</span>
+                <span class="streak-pill pill-pd">🔄 마↔플 3연속 퐁당</span>
                 <span class="streak-pill pill-orange">2연속 오버 🔥</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box focused">
@@ -6492,7 +6722,9 @@
                 <span class="streak-pill pill-fire">1연승 🔥</span>
                 <span class="streak-pill pill-green">2연속 정배 🎯</span>
                 <span class="streak-pill pill-green">1연속 플핸 🛡️</span>
+                
                 <span class="streak-pill pill-orange">1연속 오버 🔥</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -6583,7 +6815,9 @@
                 <span class="streak-pill pill-ice">1연패 🧊</span>
                 <span class="streak-pill pill-green">1연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">1연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-ice">1연속 언더 🧊</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -6698,6 +6932,7 @@
             </div>
             <div class="streak-val">1연속 언더 진행 🧊</div>
           </div>
+          <div class="streak-card streak-card-plain"><div class="streak-card-top"><span class="streak-label">세트 핸디 퐁당</span><span class="streak-badge-pill pill-gray">퐁당 없음</span></div><div class="streak-val">2경기 교대 · 퐁당 아님</div><div class="pd-flow"><span class="pd-flow-lbl">최근 4경기</span><span class="fs fs-ma">마</span><span class="fs fs-pl">플</span><span class="fs fs-pl">플</span><span class="fs fs-ma fs-latest">마</span></div></div><div class="streak-card streak-card-plain"><div class="streak-card-top"><span class="streak-label">총득점 퐁당</span><span class="streak-badge-pill pill-gray">퐁당 없음</span></div><div class="streak-val">2경기 교대 · 퐁당 아님</div><div class="pd-flow"><span class="pd-flow-lbl">최근 4경기</span><span class="fs fs-under">언</span><span class="fs fs-over">오</span><span class="fs fs-over">오</span><span class="fs fs-under fs-latest">언</span></div></div>
         </div>
       </div>
 
@@ -6760,7 +6995,7 @@
               </div>
               <div class="score-container">
                 <div class="score-box" style="color: var(--text-sub)">
-                  None
+                  -
                 </div>
                 
               </div>
@@ -6842,7 +7077,9 @@
                 <span class="streak-pill pill-fire">4연승 🔥</span>
                 <span class="streak-pill pill-green">2연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">1연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-ice">1연속 언더 🧊</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box focused">
@@ -6933,7 +7170,9 @@
                 <span class="streak-pill pill-fire">3연승 🔥</span>
                 <span class="streak-pill pill-green">1연속 정배 🎯</span>
                 <span class="streak-pill pill-green">2연속 플핸 🛡️</span>
+                
                 <span class="streak-pill pill-orange">2연속 오버 🔥</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -7024,7 +7263,9 @@
                 <span class="streak-pill pill-fire">2연승 🔥</span>
                 <span class="streak-pill pill-fire">1연속 역배 ⚡</span>
                 <span class="streak-pill pill-green">1연속 플핸 🛡️</span>
+                
                 <span class="streak-pill pill-orange">1연속 오버 🔥</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box focused">
@@ -7115,7 +7356,9 @@
                 <span class="streak-pill pill-fire">1연승 🔥</span>
                 <span class="streak-pill pill-green">1연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">1연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-ice">1연속 언더 🧊</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box focused">
@@ -7230,6 +7473,7 @@
             </div>
             <div class="streak-val">1연속 언더 진행 🧊</div>
           </div>
+          <div class="streak-card streak-card-pd"><div class="streak-card-top"><span class="streak-label">세트 핸디 퐁당</span><span class="streak-badge-pill pill-pd">🔄 퐁당</span></div><div class="streak-val">3연속 퐁당 (마핸↔플핸)</div><div class="pd-flow"><span class="pd-flow-lbl">최근 3경기</span><span class="fs fs-ma">마</span><span class="fs fs-pl">플</span><span class="fs fs-ma fs-latest">마</span></div></div><div class="streak-card streak-card-pd"><div class="streak-card-top"><span class="streak-label">총득점 퐁당</span><span class="streak-badge-pill pill-pd">🔄 퐁당</span></div><div class="streak-val">3연속 퐁당 (언더↔오버)</div><div class="pd-flow"><span class="pd-flow-lbl">최근 3경기</span><span class="fs fs-under">언</span><span class="fs fs-over">오</span><span class="fs fs-under fs-latest">언</span></div></div>
         </div>
       </div>
 
@@ -7292,7 +7536,7 @@
               </div>
               <div class="score-container">
                 <div class="score-box" style="color: var(--text-sub)">
-                  None
+                  -
                 </div>
                 
               </div>
@@ -7374,7 +7618,9 @@
                 <span class="streak-pill pill-ice">1연패 🧊</span>
                 <span class="streak-pill pill-green">1연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">1연속 마핸 ⚡</span>
+                <span class="streak-pill pill-pd">🔄 마↔플 3연속 퐁당</span>
                 <span class="streak-pill pill-ice">1연속 언더 🧊</span>
+                <span class="streak-pill pill-pd">🔄 언↔오 3연속 퐁당</span>
               </div>
             <div class="match-fixture">
               <div class="team-box focused">
@@ -7465,7 +7711,9 @@
                 <span class="streak-pill pill-fire">1연승 🔥</span>
                 <span class="streak-pill pill-fire">1연속 역배 ⚡</span>
                 <span class="streak-pill pill-green">1연속 플핸 🛡️</span>
+                
                 <span class="streak-pill pill-orange">1연속 오버 🔥</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box focused">
@@ -7556,7 +7804,9 @@
                 <span class="streak-pill pill-ice">1연패 🧊</span>
                 <span class="streak-pill pill-green">1연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">1연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-ice">1연속 언더 🧊</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -7671,6 +7921,7 @@
             </div>
             <div class="streak-val">1연속 오버 진행 🔥</div>
           </div>
+          <div class="streak-card streak-card-plain"><div class="streak-card-top"><span class="streak-label">세트 핸디 퐁당</span><span class="streak-badge-pill pill-gray">퐁당 없음</span></div><div class="streak-val">2연속 마핸 유지</div><div class="pd-flow"><span class="pd-flow-lbl">최근 4경기</span><span class="fs fs-ma">마</span><span class="fs fs-pl">플</span><span class="fs fs-ma">마</span><span class="fs fs-ma fs-latest">마</span></div></div><div class="streak-card streak-card-pd"><div class="streak-card-top"><span class="streak-label">총득점 퐁당</span><span class="streak-badge-pill pill-pd">🔄 퐁당</span></div><div class="streak-val">4연속 퐁당 (언더↔오버)</div><div class="pd-flow"><span class="pd-flow-lbl">최근 4경기</span><span class="fs fs-under">언</span><span class="fs fs-over">오</span><span class="fs fs-under">언</span><span class="fs fs-over fs-latest">오</span></div></div>
         </div>
       </div>
 
@@ -7730,7 +7981,9 @@
                 <span class="streak-pill pill-fire">2연승 🔥</span>
                 <span class="streak-pill pill-green">2연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">2연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-orange">1연속 오버 🔥</span>
+                <span class="streak-pill pill-pd">🔄 언↔오 4연속 퐁당</span>
               </div>
             <div class="match-fixture">
               <div class="team-box focused">
@@ -7821,7 +8074,9 @@
                 <span class="streak-pill pill-fire">1연승 🔥</span>
                 <span class="streak-pill pill-green">1연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">1연속 마핸 ⚡</span>
+                <span class="streak-pill pill-pd">🔄 마↔플 3연속 퐁당</span>
                 <span class="streak-pill pill-ice">1연속 언더 🧊</span>
+                <span class="streak-pill pill-pd">🔄 언↔오 3연속 퐁당</span>
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -7912,7 +8167,9 @@
                 <span class="streak-pill pill-ice">1연패 🧊</span>
                 <span class="streak-pill pill-fire">1연속 역배 ⚡</span>
                 <span class="streak-pill pill-green">1연속 플핸 🛡️</span>
+                
                 <span class="streak-pill pill-orange">1연속 오버 🔥</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -8003,7 +8260,9 @@
                 <span class="streak-pill pill-fire">1연승 🔥</span>
                 <span class="streak-pill pill-green">1연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">1연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-ice">1연속 언더 🧊</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box focused">
@@ -8118,6 +8377,7 @@
             </div>
             <div class="streak-val">2연속 언더 진행 🧊</div>
           </div>
+          <div class="streak-card streak-card-plain"><div class="streak-card-top"><span class="streak-label">세트 핸디 퐁당</span><span class="streak-badge-pill pill-gray">퐁당 없음</span></div><div class="streak-val">2연속 마핸 유지</div><div class="pd-flow"><span class="pd-flow-lbl">최근 4경기</span><span class="fs fs-ma">마</span><span class="fs fs-pl">플</span><span class="fs fs-ma">마</span><span class="fs fs-ma fs-latest">마</span></div></div><div class="streak-card streak-card-plain"><div class="streak-card-top"><span class="streak-label">총득점 퐁당</span><span class="streak-badge-pill pill-gray">퐁당 없음</span></div><div class="streak-val">2연속 언더 유지</div><div class="pd-flow"><span class="pd-flow-lbl">최근 4경기</span><span class="fs fs-under">언</span><span class="fs fs-over">오</span><span class="fs fs-under">언</span><span class="fs fs-under fs-latest">언</span></div></div>
         </div>
       </div>
 
@@ -8177,7 +8437,9 @@
                 <span class="streak-pill pill-ice">4연패 🧊</span>
                 <span class="streak-pill pill-green">2연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">2연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-ice">2연속 언더 🧊</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box focused">
@@ -8268,7 +8530,9 @@
                 <span class="streak-pill pill-ice">3연패 🧊</span>
                 <span class="streak-pill pill-green">1연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">1연속 마핸 ⚡</span>
+                <span class="streak-pill pill-pd">🔄 마↔플 3연속 퐁당</span>
                 <span class="streak-pill pill-ice">1연속 언더 🧊</span>
+                <span class="streak-pill pill-pd">🔄 언↔오 3연속 퐁당</span>
               </div>
             <div class="match-fixture">
               <div class="team-box focused">
@@ -8359,7 +8623,9 @@
                 <span class="streak-pill pill-ice">2연패 🧊</span>
                 <span class="streak-pill pill-fire">1연속 역배 ⚡</span>
                 <span class="streak-pill pill-green">1연속 플핸 🛡️</span>
+                
                 <span class="streak-pill pill-orange">1연속 오버 🔥</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -8450,7 +8716,9 @@
                 <span class="streak-pill pill-ice">1연패 🧊</span>
                 <span class="streak-pill pill-green">1연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">1연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-ice">1연속 언더 🧊</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -8565,6 +8833,7 @@
             </div>
             <div class="streak-val">3연속 오버 진행 🔥</div>
           </div>
+          <div class="streak-card streak-card-plain"><div class="streak-card-top"><span class="streak-label">세트 핸디 퐁당</span><span class="streak-badge-pill pill-gray">퐁당 없음</span></div><div class="streak-val">2경기 교대 · 퐁당 아님</div><div class="pd-flow"><span class="pd-flow-lbl">최근 4경기</span><span class="fs fs-ma">마</span><span class="fs fs-pl">플</span><span class="fs fs-pl">플</span><span class="fs fs-ma fs-latest">마</span></div></div><div class="streak-card streak-card-plain"><div class="streak-card-top"><span class="streak-label">총득점 퐁당</span><span class="streak-badge-pill pill-gray">퐁당 없음</span></div><div class="streak-val">3연속 오버 유지</div><div class="pd-flow"><span class="pd-flow-lbl">최근 4경기</span><span class="fs fs-under">언</span><span class="fs fs-over">오</span><span class="fs fs-over">오</span><span class="fs fs-over fs-latest">오</span></div></div>
         </div>
       </div>
 
@@ -8624,7 +8893,9 @@
                 <span class="streak-pill pill-ice">4연패 🧊</span>
                 <span class="streak-pill pill-green">4연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">1연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-orange">3연속 오버 🔥</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -8715,7 +8986,9 @@
                 <span class="streak-pill pill-ice">3연패 🧊</span>
                 <span class="streak-pill pill-green">3연속 정배 🎯</span>
                 <span class="streak-pill pill-green">2연속 플핸 🛡️</span>
+                
                 <span class="streak-pill pill-orange">2연속 오버 🔥</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box focused">
@@ -8806,7 +9079,9 @@
                 <span class="streak-pill pill-ice">2연패 🧊</span>
                 <span class="streak-pill pill-green">2연속 정배 🎯</span>
                 <span class="streak-pill pill-green">1연속 플핸 🛡️</span>
+                
                 <span class="streak-pill pill-orange">1연속 오버 🔥</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box focused">
@@ -8897,7 +9172,9 @@
                 <span class="streak-pill pill-ice">1연패 🧊</span>
                 <span class="streak-pill pill-green">1연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">1연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-ice">1연속 언더 🧊</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -9012,7 +9289,17 @@
             </div>
             <div class="streak-val">1경기 연속 언더 행진 🧊</div>
           </div>
+          <div class="streak-card streak-card-plain"><div class="streak-card-top"><span class="streak-label">리그 핸디 퐁당</span><span class="streak-badge-pill pill-gray">퐁당 없음</span></div><div class="streak-val">5연속 마핸 유지</div><div class="pd-flow"><span class="pd-flow-lbl">최근 6경기</span><span class="fs fs-pl">플</span><span class="fs fs-ma">마</span><span class="fs fs-ma">마</span><span class="fs fs-ma">마</span><span class="fs fs-ma">마</span><span class="fs fs-ma fs-latest">마</span></div></div><div class="streak-card streak-card-pd"><div class="streak-card-top"><span class="streak-label">리그 언오버 퐁당</span><span class="streak-badge-pill pill-pd">🔄 퐁당</span></div><div class="streak-val">3연속 퐁당 (언더↔오버)</div><div class="pd-flow"><span class="pd-flow-lbl">최근 6경기</span><span class="fs fs-over">오</span><span class="fs fs-under">언</span><span class="fs fs-under">언</span><span class="fs fs-under">언</span><span class="fs fs-over">오</span><span class="fs fs-under fs-latest">언</span></div></div>
         </div>
+      </div>
+
+      
+      <div class="pd-teams-box">
+        <div class="pd-teams-head">
+          <span class="pd-teams-title">🔄 현재 퐁당 진행 중 구단</span>
+          <span class="pd-teams-sub">3경기 이상 교대 · 4건</span>
+        </div>
+        <div class="pd-teams-chips"><span class="pd-chip pd-chip-uo"><span class="pd-chip-team">GS칼텍스</span><span class="pd-chip-tag">언↔오 4</span><span class="pd-chip-flow"><span class="fs fs-under">언</span><span class="fs fs-over">오</span><span class="fs fs-under">언</span><span class="fs fs-over fs-latest">오</span></span></span><span class="pd-chip pd-chip-ma"><span class="pd-chip-team">정관장</span><span class="pd-chip-tag">마↔플 3</span><span class="pd-chip-flow"><span class="fs fs-ma">마</span><span class="fs fs-pl">플</span><span class="fs fs-ma fs-latest">마</span></span></span><span class="pd-chip pd-chip-uo"><span class="pd-chip-team">정관장</span><span class="pd-chip-tag">언↔오 3</span><span class="pd-chip-flow"><span class="fs fs-under">언</span><span class="fs fs-over">오</span><span class="fs fs-under fs-latest">언</span></span></span><span class="pd-chip pd-chip-uo"><span class="pd-chip-team">흥국생명</span><span class="pd-chip-tag">언↔오 3</span><span class="pd-chip-flow"><span class="fs fs-under">언</span><span class="fs fs-under">언</span><span class="fs fs-over">오</span><span class="fs fs-under fs-latest">언</span></span></span></div>
       </div>
 
       <div class="stats-grid">
@@ -9069,7 +9356,7 @@
               </div>
               <div class="score-container">
                 <div class="score-box" style="color: var(--text-sub)">
-                  None
+                  -
                 </div>
                 
               </div>
@@ -9151,7 +9438,9 @@
                 
                 <span class="streak-pill pill-green">7연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">5연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-ice">1연속 언더 🧊</span>
+                <span class="streak-pill pill-pd">🔄 언↔오 3연속 퐁당</span>
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -9242,7 +9531,9 @@
                 
                 <span class="streak-pill pill-green">6연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">4연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-orange">1연속 오버 🔥</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -9333,7 +9624,9 @@
                 
                 <span class="streak-pill pill-green">5연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">3연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-ice">3연속 언더 🧊</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -9424,7 +9717,9 @@
                 
                 <span class="streak-pill pill-green">4연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">2연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-ice">2연속 언더 🧊</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -9515,7 +9810,9 @@
                 
                 <span class="streak-pill pill-green">3연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">1연속 마핸 ⚡</span>
+                <span class="streak-pill pill-pd">🔄 마↔플 4연속 퐁당</span>
                 <span class="streak-pill pill-ice">1연속 언더 🧊</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -9606,7 +9903,9 @@
                 
                 <span class="streak-pill pill-green">2연속 정배 🎯</span>
                 <span class="streak-pill pill-green">1연속 플핸 🛡️</span>
+                <span class="streak-pill pill-pd">🔄 마↔플 3연속 퐁당</span>
                 <span class="streak-pill pill-orange">5연속 오버 🔥</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -9697,7 +9996,9 @@
                 
                 <span class="streak-pill pill-green">1연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">1연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-orange">4연속 오버 🔥</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -9788,7 +10089,9 @@
                 
                 <span class="streak-pill pill-fire">2연속 역배 ⚡</span>
                 <span class="streak-pill pill-green">3연속 플핸 🛡️</span>
+                
                 <span class="streak-pill pill-orange">3연속 오버 🔥</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -9879,7 +10182,9 @@
                 
                 <span class="streak-pill pill-fire">1연속 역배 ⚡</span>
                 <span class="streak-pill pill-green">2연속 플핸 🛡️</span>
+                
                 <span class="streak-pill pill-orange">2연속 오버 🔥</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -9970,7 +10275,9 @@
                 
                 <span class="streak-pill pill-green">5연속 정배 🎯</span>
                 <span class="streak-pill pill-green">1연속 플핸 🛡️</span>
+                
                 <span class="streak-pill pill-orange">1연속 오버 🔥</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -10061,7 +10368,9 @@
                 
                 <span class="streak-pill pill-green">4연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">4연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-ice">4연속 언더 🧊</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -10152,7 +10461,9 @@
                 
                 <span class="streak-pill pill-green">3연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">3연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-ice">3연속 언더 🧊</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -10243,7 +10554,9 @@
                 
                 <span class="streak-pill pill-green">2연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">2연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-ice">2연속 언더 🧊</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
@@ -10334,7 +10647,9 @@
                 
                 <span class="streak-pill pill-green">1연속 정배 🎯</span>
                 <span class="streak-pill pill-purple">1연속 마핸 ⚡</span>
+                
                 <span class="streak-pill pill-ice">1연속 언더 🧊</span>
+                
               </div>
             <div class="match-fixture">
               <div class="team-box ">
