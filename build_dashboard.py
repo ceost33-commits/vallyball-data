@@ -619,8 +619,8 @@ def render_all_view_pane(view_id, league_key, matches, teams):
         uo_badge_lbl = "🔥 오버" if uo_type == "OVER" else "🧊 언더"
 
     pd_cards_html = (
-        pd_card_html("리그 마핸/플핸 퐁당", "마핸↔플핸", alt_run_len(h_hist), h_hist, HANDI_SYM, HANDI_FS, h_streak, h_type) +
-        pd_card_html("리그 언오버 퐁당", "언더↔오버", alt_run_len(uo_hist), uo_hist, UO_SYM, UO_FS, uo_streak, UO_KO.get(uo_type, uo_type))
+        pd_card_html("마핸/플핸 퐁당", "마핸↔플핸", alt_run_len(h_hist), h_hist, HANDI_SYM, HANDI_FS, h_streak, h_type) +
+        pd_card_html("언오버 퐁당", "언더↔오버", alt_run_len(uo_hist), uo_hist, UO_SYM, UO_FS, uo_streak, UO_KO.get(uo_type, uo_type))
     )
     pd_teams_box = render_pd_teams_box(teams, matches)
 
