@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-25 08:04",
+  "last_updated": "2026-11-26 08:04",
   "mens": [
     {
       "id": "M20261031",
@@ -743,29 +743,64 @@
       "league": "KOVO남",
       "home": "한국전력 빅스톰",
       "away": "현대캐피탈 스카이워커스",
+      "status": "종료",
+      "set_score": "2:3",
+      "sets_detail": [],
+      "total_points": 203,
+      "win_lose": {
+        "match_no": "5662",
+        "home_odds": 1.75,
+        "away_odds": 1.73,
+        "winner": "AWAY",
+        "favorite": "AWAY",
+        "hit_odds": 1.73,
+        "hit_type": "정배"
+      },
+      "handicap": {
+        "match_no": "5663",
+        "standard": 1.5,
+        "home_odds": 1.36,
+        "away_odds": 2.55,
+        "result": "HOME"
+      },
+      "under_over": {
+        "match_no": "5664",
+        "standard": 187.5,
+        "over_odds": 1.69,
+        "under_odds": 1.74,
+        "result": "OVER"
+      }
+    },
+    {
+      "id": "M20261126",
+      "date": "2026-11-26 19:00",
+      "round": "프로토 승부식 140회차",
+      "league": "KOVO남",
+      "home": "우리카드 우리WON",
+      "away": "삼성화재 블루팡스",
       "status": "예정",
       "set_score": "-",
       "sets_detail": [],
       "total_points": null,
       "win_lose": {
-        "match_no": "5662",
-        "home_odds": 1.75,
-        "away_odds": 1.73,
+        "match_no": "5839",
+        "home_odds": 2.86,
+        "away_odds": 1.25,
         "winner": null,
         "favorite": "AWAY",
         "hit_odds": null,
         "hit_type": null
       },
       "handicap": {
-        "match_no": "5663",
+        "match_no": "5840",
         "standard": 1.5,
-        "home_odds": 1.32,
-        "away_odds": 2.55,
+        "home_odds": 1.87,
+        "away_odds": 1.63,
         "result": null
       },
       "under_over": {
-        "match_no": "5664",
-        "standard": 187.5,
+        "match_no": "5841",
+        "standard": 184.5,
         "over_odds": 1.74,
         "under_odds": 1.74,
         "result": null
@@ -1518,29 +1553,64 @@
       "league": "KOVO여",
       "home": "IBK기업은행 알토스",
       "away": "한국도로공사 하이패스",
-      "status": "예정",
-      "set_score": "-",
+      "status": "종료",
+      "set_score": "0:3",
       "sets_detail": [],
-      "total_points": null,
+      "total_points": 136,
       "win_lose": {
         "match_no": "5666",
         "home_odds": 2.59,
         "away_odds": 1.31,
-        "winner": null,
+        "winner": "AWAY",
         "favorite": "AWAY",
-        "hit_odds": null,
-        "hit_type": null
+        "hit_odds": 1.31,
+        "hit_type": "정배"
       },
       "handicap": {
         "match_no": "5667",
         "standard": 1.5,
         "home_odds": 1.8,
         "away_odds": 1.68,
-        "result": null
+        "result": "AWAY"
       },
       "under_over": {
         "match_no": "5668",
-        "standard": 180.5,
+        "standard": 182.5,
+        "over_odds": 1.74,
+        "under_odds": 1.92,
+        "result": "UNDER"
+      }
+    },
+    {
+      "id": "W20261126",
+      "date": "2026-11-26 19:00",
+      "round": "프로토 승부식 140회차",
+      "league": "KOVO여",
+      "home": "현대건설 힐스테이트",
+      "away": "SOOP SOOPers",
+      "status": "예정",
+      "set_score": "-",
+      "sets_detail": [],
+      "total_points": null,
+      "win_lose": {
+        "match_no": "5843",
+        "home_odds": 1.05,
+        "away_odds": 5.08,
+        "winner": null,
+        "favorite": "HOME",
+        "hit_odds": null,
+        "hit_type": null
+      },
+      "handicap": {
+        "match_no": "5844",
+        "standard": -2.5,
+        "home_odds": 1.94,
+        "away_odds": 1.58,
+        "result": null
+      },
+      "under_over": {
+        "match_no": "5845",
+        "standard": 172.5,
         "over_odds": 1.74,
         "under_odds": 1.74,
         "result": null
