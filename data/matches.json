@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-11-27 08:06",
+  "last_updated": "2026-11-28 08:04",
   "mens": [
     {
       "id": "M20261031",
@@ -813,29 +813,64 @@
       "league": "KOVO남",
       "home": "대한항공 점보스",
       "away": "KB손해보험 스타즈",
+      "status": "종료",
+      "set_score": "3:1",
+      "sets_detail": [],
+      "total_points": 210,
+      "win_lose": {
+        "match_no": "6101",
+        "home_odds": 1.17,
+        "away_odds": 3.39,
+        "winner": "HOME",
+        "favorite": "HOME",
+        "hit_odds": 1.01,
+        "hit_type": "정배"
+      },
+      "handicap": {
+        "match_no": "6102",
+        "standard": -2.5,
+        "home_odds": "-",
+        "away_odds": 1.59,
+        "result": "AWAY"
+      },
+      "under_over": {
+        "match_no": "6103",
+        "standard": 175.5,
+        "over_odds": 1.74,
+        "under_odds": "-",
+        "result": "OVER"
+      }
+    },
+    {
+      "id": "M20261128",
+      "date": "2026-11-28 14:00",
+      "round": "프로토 승부식 141회차",
+      "league": "KOVO남",
+      "home": "OK저축은행 읏맨",
+      "away": "한국전력 빅스톰",
       "status": "예정",
       "set_score": "-",
       "sets_detail": [],
       "total_points": null,
       "win_lose": {
-        "match_no": "6101",
-        "home_odds": 1.17,
-        "away_odds": 3.39,
+        "match_no": "6274",
+        "home_odds": 2.0,
+        "away_odds": 1.54,
         "winner": null,
-        "favorite": "HOME",
+        "favorite": "AWAY",
         "hit_odds": null,
         "hit_type": null
       },
       "handicap": {
-        "match_no": "6102",
-        "standard": -1.5,
-        "home_odds": 1.5,
-        "away_odds": 2.07,
+        "match_no": "6275",
+        "standard": 1.5,
+        "home_odds": 1.46,
+        "away_odds": 2.15,
         "result": null
       },
       "under_over": {
-        "match_no": "6103",
-        "standard": 182.5,
+        "match_no": "6276",
+        "standard": 185.5,
         "over_odds": 1.74,
         "under_odds": 1.74,
         "result": null
@@ -1658,29 +1693,64 @@
       "league": "KOVO여",
       "home": "흥국생명 핑크스파이더스",
       "away": "GS칼텍스 서울Kixx",
+      "status": "종료",
+      "set_score": "0:3",
+      "sets_detail": [],
+      "total_points": 151,
+      "win_lose": {
+        "match_no": "6105",
+        "home_odds": 3.48,
+        "away_odds": 1.16,
+        "winner": "AWAY",
+        "favorite": "AWAY",
+        "hit_odds": 1.16,
+        "hit_type": "정배"
+      },
+      "handicap": {
+        "match_no": "6106",
+        "standard": 1.5,
+        "home_odds": 2.18,
+        "away_odds": 1.33,
+        "result": "AWAY"
+      },
+      "under_over": {
+        "match_no": "6107",
+        "standard": 178.5,
+        "over_odds": 1.74,
+        "under_odds": 1.92,
+        "result": "UNDER"
+      }
+    },
+    {
+      "id": "W20261128",
+      "date": "2026-11-28 16:00",
+      "round": "프로토 승부식 141회차",
+      "league": "KOVO여",
+      "home": "정관장 레드스파크스",
+      "away": "IBK기업은행 알토스",
       "status": "예정",
       "set_score": "-",
       "sets_detail": [],
       "total_points": null,
       "win_lose": {
-        "match_no": "6105",
-        "home_odds": 3.48,
-        "away_odds": 1.16,
+        "match_no": "6295",
+        "home_odds": 2.92,
+        "away_odds": 1.24,
         "winner": null,
         "favorite": "AWAY",
         "hit_odds": null,
         "hit_type": null
       },
       "handicap": {
-        "match_no": "6106",
+        "match_no": "6296",
         "standard": 1.5,
-        "home_odds": 2.18,
-        "away_odds": 1.45,
+        "home_odds": 1.95,
+        "away_odds": 1.57,
         "result": null
       },
       "under_over": {
-        "match_no": "6107",
-        "standard": 178.5,
+        "match_no": "6297",
+        "standard": 179.5,
         "over_odds": 1.74,
         "under_odds": 1.74,
         "result": null
